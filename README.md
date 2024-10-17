@@ -1,8 +1,14 @@
-# github-runner-dockerfile
-Dockerfile for the creation of a GitHub Actions runner image to be deployed dynamically. [Find the full explanation and tutorial here](https://baccini-al.medium.com/creating-a-dockerfile-for-dynamically-creating-github-actions-self-hosted-runners-5994cc08b9fb).
+# Github Actions Runner (Dockerized)
 
-When running the docker image, or when executing docker compose, environment variables for repo-owner/repo-name and github-token must be included. 
+## How to use:
 
-Credit to [testdriven.io](https://testdriven.io/blog/github-actions-docker/) for the original start.sh script, which I slightly modified to make it work with a regular repository rather than with an enterprise. 
+1. Get a PAT (Pesonal Access Token) from Github that has administration permissions on the repo you want the image to run actions for.
+2. Store that token in `secret.txt` on the root directory.
+3. Copy the `.env.example` into `.env` on the root directory and replace the value for the actual repo to target.
+4. Run ```docker compose up -d``` to start the container.
+5. Once the container is up and running, you should be able to find it in Github under the repo's runners listing.
 
-Whene generating your GitHub PAT you will need to include `repo`, `workflow`, and `admin:org` permissions.
+The runner removes itself from github if stopped gracefully.
+
+## Next features
+- [ ] Have mounted volumes/databases to store run logs
