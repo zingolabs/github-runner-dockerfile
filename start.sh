@@ -1,7 +1,20 @@
 #!/bin/bash
 
+
+# Fail-proof check for missing variables
+if [ -z "$REPO" ]; then
+  echo "Error: REPO environment variable is not set."
+  exit 1
+fi
+
+# Get GH_TOKEN from Docker secrets
+ACCESS_TOKEN=$(cat /run/secrets/GH_TOKEN)
+if [ -z "$ACCESS_TOKEN" ]; then
+  echo "Error: GH_TOKEN secret is not accessible."
+  exit 1
+fi
+
 REPOSITORY=$REPO
-ACCESS_TOKEN=$GH_TOKEN
 
 echo "REPO ${REPOSITORY}"
 echo "ACCESS_TOKEN ${ACCESS_TOKEN}"
