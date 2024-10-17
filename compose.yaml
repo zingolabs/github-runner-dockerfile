@@ -1,0 +1,11 @@
+services:
+  runner:
+    image: zingodevops/runner-image:latest
+    restart: always
+    env_file: 
+      - ./.env
+    secrets:
+      - GH_TOKEN
+secrets:
+  GH_TOKEN:
+    file: ./secret.txt
